@@ -1,0 +1,8 @@
+<?php
+$tb = opcionController::getTablesDB();
+foreach ($tb as $t):
+?>    
+<div class="h" style="padding: 2px;" onclick="opcion.getHtmlColumnas(this,'<?php echo $t['Name']; ?>');"><?php echo $t['Name']; ?></div>
+<?php  
+endforeach;
+?>

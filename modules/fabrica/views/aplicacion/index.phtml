@@ -1,0 +1,40 @@
+<?php 
+/*
+* ---------------------------------------
+* --------- CREATED BY CREATOR ----------
+* fecha: 18-08-2014 19:08:36 
+* Descripcion : indexAplicacion.phtml
+* ---------------------------------------
+*/
+$grabar   = Session::getPermiso("CRAPGR");
+$eliminar = Session::getPermiso("CRAPDE");
+echo Functions::widgetOpen(array(
+        "id"=>CRAP,
+        "title"=>"Aplicacion"
+    )); 
+?>
+
+    <div class="widget-body-toolbar"></div>
+    <div class="dataTables_wrapper form-inline" role="grid">
+        <div class="dt-top-row">
+            <div class="DTTT btn-group">
+                <!-- verificar permisos -->
+                <?php if($grabar["permiso"]): ?>
+                <button id="<?php echo CRAP; ?>btnNewAplicacion" type="button" onclick="aplicacion.getFormNewAplicacion(this);" class="btn txt-color-white bg-color-blueDark">
+                    <i class="fa fa-file-o"></i> <?php echo BTN_NUEVO; ?>
+                </button>
+                <?php endif; ?>
+                <!-- verificar permisos -->
+                <?php if($eliminar["permiso"]): ?>
+                <button id="<?php echo CRAP; ?>btnDeleteAplicacion" type="button" onclick="aplicacion.postDeleteAplicacionAll(this);" class="btn txt-color-white bg-color-blueDark">
+                    <i class="fa fa-trash-o"></i> <?php echo BTN_DELETE; ?>
+                </button>
+                <?php endif; ?>
+            </div>
+        </div>
+
+    </div>
+    <form id="<?php echo CRAP; ?>formGridAplicacion" name="<?php echo T5; ?>formGridAplicacion">
+        <table id="<?php echo CRAP; ?>gridAplicacion" class="table table-striped table-bordered table-hover table-condensed" style="width:100%"></table>
+    </form>
+<?php echo Functions::widgetClose(); ?>

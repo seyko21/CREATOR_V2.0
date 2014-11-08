@@ -1,0 +1,305 @@
+<table id="<?php echo T6; ?>gridColumns" class="table table-bordered table-striped table-condensed table-hover smart-form has-tickbox">
+    <thead>
+        <tr>
+            <th style="width: 15%" class="center">Columna</th>
+            <th style="width: 2%" class="center">Usar</th>
+            <th style="width: 2%" class="center">Key</th>
+            <th style="width: 8%" class="center">Id</th>
+            <th style="width: 8%" class="center">Name</th>
+            <th style="width: 20%" class="center">Etiqueta</th>
+            <th style="width: 22%" colspan="2" class="center">Ayuda</th>
+            <th style="width: 8%" class="center">Tipo</th>
+            <th style="width: 3%" class="center">Data</th>
+            <th style="width: 3%" class="center">Validar</th>
+        </tr> 
+    </thead>
+    <tbody id="<?php echo T6; ?>cont-columdas">
+
+        <?php
+        $cols = opcionController::getColumnsDB();
+        $key = 0;
+        foreach ($cols as $c):
+            $key++;
+            ?>
+            <tr>
+                <td style="height: 32px"><?php echo $c['COLUMN_NAME']; ?></td>
+                <td class="center">
+                    <!--USAR-->
+                    <label class="checkbox">
+                        <input onclick="opcionScript.enableCols(this,<?php echo $key; ?>);" type="checkbox" id="<?php echo T6.$key; ?>chk_usar" name="<?php echo T6 ?>chk_usar[]" value="<?php echo $c['COLUMN_NAME']; ?>"><i></i>
+                    </label>
+                </td>
+                <td class="center">
+                    <!--KEY-->
+                    <label class="checkbox state-disabled">
+                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_key" name="<?php echo T6 ?>chk_key[]" disabled><i></i>
+                    </label>
+                </td>
+                <td>
+                    <!--ID-->
+                    <label class="input">
+                        <input class="form-control" type="text" id="<?php echo T6.$key; ?>txt_id" name="<?php echo T6 ?>txt_id[]" disabled>
+                    </label>
+                </td>
+                <td>
+                    <!--NAME-->
+                    <label class="input">
+                        <input class="form-control" type="text" id="<?php echo T6.$key; ?>txt_name" name="<?php echo T6 ?>txt_name[]" disabled>
+                    </label>
+                </td>
+                <td>
+                    <!--ETIQUETA-->
+                    <label class="input">
+                        <input class="form-control" type="text" id="<?php echo T6.$key; ?>txt_etiqueta" name="<?php echo T6 ?>txt_etiqueta[]" disabled>
+                    </label>
+                </td>
+                <td>
+                    <!--AYUDA?-->
+                    <label class="checkbox state-disabled">
+                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_ayuda" name="<?php echo T6 ?>chk_ayuda[]" disabled onclick="opcionScript.enableAyuda(this,<?php echo $key; ?>);"><i></i>
+                    </label>
+                </td>
+                <td>
+                    <!--AYUDA-->
+                    <label class="input">
+                        <input class="form-control" type="text" id="<?php echo T6.$key; ?>txt_ayuda" name="<?php echo T6 ?>txt_ayuda[]" disabled>
+                    </label>
+                </td>
+                <td>
+                    <!--TIPO-->
+                    <label class="select">
+                        <select class="form-control" id="<?php echo T6.$key; ?>lst_tipo" name="<?php echo T6 ?>lst_tipo[]" disabled onchange="opcionScript.enableCols2(this,<?php echo $key; ?>);">
+                            <option value="">--------</option>
+                            <option value="text">text</option>
+                            <option value="textarea">textarea</option>
+                            <option value="select">select</option>
+                            <option value="radio">radio</option>
+                            <option value="checkbox">checkbox</option>
+                        </select><i></i>
+                    </label>
+                </td>
+                <td>
+                    <!--TIPO DATA-->
+                    <label class="select">
+                        <select class="form-control" id="<?php echo T6.$key; ?>lst_tipodata" name="<?php echo T6 ?>lst_tipodata[]" disabled>
+                            <option value="">--------</option>
+                            <option value="F" onclick="opcion.getFormData('F','<?php echo T6.$key; ?>');">Fijo</option>
+                            <option value="D" onclick="opcion.getFormData('D','<?php echo T6.$key; ?>');">Dinámico</option>
+                        </select><i></i>
+                    </label>
+                </td>
+                <td>
+                    <!--VALIDAR-->
+                    <button type="button" class="btn btn-default" onclick="opcionScript.showFormValidate(<?php echo $key?>);" id="<?php echo T6.$key; ?>chk_validar" disabled  style="padding: 5px"><i class="fa fa-check"></i></button>
+                    
+                    <!--FORMULARIO PARA VALIDAR-->
+                    <div style="position: relative;left:-410px">
+                        <div id="<?php echo T6.$key ?>formValidate" class="validaV" style="position: absolute;z-index: 7777777;display: none">
+                            <div class="modal-dialog" style="width:400%">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="padding: 5px">
+                                        <button type="button" class="close"  aria-hidden="true" onclick="$('#<?php echo T6.$key ?>formValidate').fadeOut()" style="padding: 5px">
+                                            X
+                                        </button>
+                                        <h4 class="modal-title" style="padding: 5px"><?php echo LABEL_18; ?></h4>
+                                    </div>
+                                    <div class="modal-body smart-form" style="padding: 5px">
+                                        
+                                        
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_required" name="<?php echo T6 ?>chk_required[]" ></input>
+                                                        <i></i> Required
+                                                    </label>
+                                                </div>
+                                                
+                                                <label class="label col col-1"></label>
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_range" name="<?php echo T6 ?>chk_range[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_range_del');opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_range_al');"></input>
+                                                        <i></i> Range
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3" style="margin-left:25px">
+                                                    <label class="input"> 
+                                                        <input class="label" type="text" id="<?php echo T6.$key; ?>txt_range_del" name="<?php echo T6 ?>txt_range_del[]" disabled="disabled" onkeyup="opcionScript.validaNumber(this,'#<?php echo T6.$key; ?>txt_range_al');"></input>
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_range_al" name="<?php echo T6 ?>txt_range_al[]" disabled="disabled" onkeyup="opcionScript.validaNumber('#<?php echo T6.$key; ?>txt_range_del',this);"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                  
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_date" name="<?php echo T6 ?>chk_date[]"></input>
+                                                        <i></i> Date
+                                                    </label>
+                                                </div>
+                                                
+                                                <label class="label col col-1"></label>
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_rangelenth" name="<?php echo T6 ?>chk_rangelenth[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_rangelenth_del');opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_rangelenth_al');"></input>
+                                                        <i></i> Rangelength
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3" style="margin-left:25px">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_rangelenth_del" name="<?php echo T6 ?>txt_rangelenth_del[]" disabled="disabled" onkeyup="opcionScript.validaNumber(this,'#<?php echo T6.$key; ?>txt_rangelenth_al');"></input>
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_rangelenth_al" name="<?php echo T6 ?>txt_rangelenth_al[]" disabled="disabled" onkeyup="opcionScript.validaNumber('#<?php echo T6.$key; ?>txt_rangelenth_del',this);"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_url" name="<?php echo T6 ?>chk_url[]"></input>
+                                                        <i></i> URL
+                                                    </label>
+                                                </div>
+                                                
+                                                <label class="label col col-1"></label>
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_minlength" name="<?php echo T6 ?>chk_minlength[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_minlength');"></input>
+                                                        <i></i> Minlength
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3" style="margin-left:25px">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_minlength" name="<?php echo T6 ?>txt_minlength[]" disabled="disabled"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                       
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_numero" name="<?php echo T6 ?>chk_numero[]"></input>
+                                                        <i></i> Número
+                                                    </label>
+                                                </div>
+                                                
+                                                <label class="label col col-1"></label>
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_maxlength" name="<?php echo T6 ?>chk_maxlength[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_maxlength');"></input>
+                                                        <i></i> Maxlength
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3" style="margin-left:25px">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_maxlength" name="<?php echo T6 ?>txt_maxlength[]" disabled="disabled"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        
+                                        
+                                        
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_email" name="<?php echo T6 ?>chk_email[]"></input>
+                                                        <i></i> Email
+                                                    </label>
+                                                </div>
+                                                
+                                                <label class="label col col-1"></label>
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_max" name="<?php echo T6 ?>chk_max[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_max');"></input>
+                                                        <i></i> Max
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3" style="margin-left:25px">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_max" name="<?php echo T6 ?>txt_max[]" disabled="disabled"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        
+                                        <section>
+                                            <div class="row">
+                                                <div class="col col-2">
+                                                    <label class="checkbox"> 
+                                                        <input type="checkbox" id="<?php echo T6.$key; ?>chk_min" name="<?php echo T6 ?>chk_min[]" onclick="opcionScript.activeTxt(this,'#<?php echo T6.$key; ?>txt_min');"></input>
+                                                        <i></i> Min
+                                                    </label>
+                                                </div>
+                                                <div class="col col-3">
+                                                    <label class="input"> 
+                                                        <input type="text" id="<?php echo T6.$key; ?>txt_min" name="<?php echo T6 ?>txt_min[]" disabled="disabled"></input>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        
+                                        
+                                    </div>
+                                    <div class="modal-footer" style="padding: 5px">
+                                        <button type="button" class="btn btn-default" onclick="$('#<?php echo T6.$key ?>formValidate').fadeOut()" style="padding: 5px">
+                                            <i class="fa fa-ban"></i> <?php echo BTN_CLOSE; ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--FIN FORMULARIO PARA VALIDAR-->
+                </td>
+            </tr>
+            <?php
+        endforeach;
+        ?>
+    </tbody>
+</table>
+<script>
+        
+        
+    (function() {
+        var mySt = new scrollTable(''+tabs.T6+'gridColumns',{
+            fixedCols : 1,
+            colWidths : [170, 35, 35, 100, 100, 150, 35, 170, 110, 90, 50]
+        });
+    })();
+    /*scrollTable duplica los elementos, tengo q eliminarlos, para poder manipularlos*/
+    $('.sFHeader').find('table').removeAttr('id');
+    $('.sHeaderInner').find('table').removeAttr('id');
+    $('.sFDataInner').find('table').removeAttr('id');
+    $('.sFDataInner').find('table').find('tbody tr').find("td:first").nextAll().remove();
+    
+   
+simpleScript.removeAttr.click({
+    container: '#'+tabs.T6+'gridColumns', //widget del datagrid
+    typeElement: 'input'
+});
+
+//setTimeout(function(){
+//            $("#<?php echo T6; ?>gridColumns").dataTable({
+//                sScrollY: "200px",
+//                bPaginate: false,
+//                bInfo: false,
+//                bFilter: false
+//            });
+//        },500);
+</script>

@@ -1,0 +1,110 @@
+<?php
+/*
+ * Documento   : menuPrincipales
+ * Creado      : 11-jul-2014
+ * Autor       : ..... .....
+ * Descripcion : 
+ */
+$eliminar = Session::getPermiso('MNUDE');
+$editar   = Session::getPermiso('MNUED');
+
+$data = configurarMenuController::getMenuPrincipales();
+?>
+<?php if(sizeof($data)): ?>
+<ol id="ol-menuprincipal" class="lista-redondeada ol">
+    <?php 
+        foreach ($data as $value): 
+            $inactivo = 'text-decoration:line-through;color: red;';
+            if($value['activo'] == '1'){
+                $inactivo = '';
+            }
+            $url = str_replace(',',',<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$value['url']);
+            $url = str_replace('(','(<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',$url);
+            $url = str_replace(')','<br>)',$url);
+    ?>
+    <li id="liMenPri_<?php echo $value['id_menuprincipal']; ?>" data-orden="<?php echo $value['id_menuprincipal']; ?>" data-url="<?php echo $url ?>" data-alias="<?php echo $value['alias']; ?>">
+            <a onclick="popoverResize();" href="javascript:;" rel="popover" data-placement="top" data-original-title="<?php echo $value['menuprincipal']; ?>" data-content="<div><b>Alias:</b> <?php echo $value['alias']; ?></div><div><b>URL:</b> <br><?php echo $url ?></div><div><b>Orden:</b> <?php echo $value['orden']; ?></div>" data-html="true">
+                <span style="<?php echo $inactivo; ?>"><?php echo $value['menuprincipal']; ?></span>
+                <div class="pull-right btn-group" style="margin-top: -4px;">
+                    <?php if ($editar['permiso']): ?>
+                    <button class="<?php echo $editar['theme']; ?>" title="<?php echo $editar['accion']; ?>" onclick="configurarMenu.getEditarMenuPrincipal('<?php echo AesCtr::en($value['id_menuprincipal']); ?>');">
+                        <i class="<?php echo $editar['icono']; ?>"></i>
+                    </button>
+                    <?php endif; ?>
+                    <?php if ($eliminar['permiso']): ?>
+                        <button class="<?php echo $eliminar['theme']; ?>" title="<?php echo $eliminar['accion']; ?>" onclick="configurarMenu.postDeleteMenuPrincipal('<?php echo AesCtr::en($value['id_menuprincipal']); ?>');">
+                            <i class="<?php echo $eliminar['icono']; ?>"></i>
+                        </button>
+                    <?php endif; ?>
+                </div>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ol>
+<script>
+    function popoverResize(){
+        if($('.popover').length > 0){
+                $('.popover').css('width','1000px');
+        }
+    }
+    // activate popovers with hover states
+    $("[rel=popover]").popover({
+            trigger : "click"
+    });
+    function moverLiMenuPrincipal(el,dom){
+        /*reset key opcion y sus contenedores*/
+        configurarMenu.resetKeyOpcion();
+        configurarMenuScript.resetFromOpcion();
+        
+        configurarMenu.getOpciones(el);
+        
+        $('#name-menuprincipal').hide();
+        $('#clonex div').css({
+            top: 0,
+            left: 0,
+            display: 'none'
+        });
+        
+        var pos = $('#liMenPri_'+simpleAjax.stringGet(el)).position();
+        $('#clonex').css({
+            left: pos.left + 59,
+            top: pos.top + 380
+        });
+        
+        $('.popover').css('display','none');
+        $('#clonex div').css('display','block');
+        $('#clonex div').html(dom);
+        $('#clonex div').animate({
+            left: '+=550'
+            }, 1000, function() {
+                $('#clonex div').fadeOut();
+                $('#name-menuprincipal').html(dom).fadeOut().delay(500).fadeIn();
+        });
+
+    }
+    
+    //    mover listas
+    $("#ol-menuprincipal").sortable({
+        update:function(){
+            var url = $(this).attr('data-url');
+            var alias = $(this).attr('data-alias');
+            var ordenElementos = $(this).sortable("toArray",{attribute: 'data-orden'}).toString(); 
+            configurarMenu.postOrdenar('MEP',ordenElementos);
+            
+            $.each($('#ol-menuprincipal').find('li'),function(index,value){
+                var h = $(this).find('a').attr('data-content','<div><b>Alias:</b> '+alias+'</div><div><b>URL:</b> '+url+'</div><div><b>Orden:</b> '+(1 + index)+'</div>');
+            });
+        }
+    });
+    
+    /*para quitar evento*/
+    simpleScript.removeAttr.click({
+        container: '#widget_<?php echo T3.'menuprincipal'; ?>',
+        typeElement: 'button, a'
+    });
+</script>
+<?php else: ?>
+<div  class="no-result-menu">
+    <div class="alert alert-danger">No se encontraron registros</div>
+</div>
+<?php endif; ?>

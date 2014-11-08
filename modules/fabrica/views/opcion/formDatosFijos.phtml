@@ -1,0 +1,119 @@
+<?php
+$campo = SimpleForm::getParam('_campo');
+?>
+<form id="<?php echo T6; ?>formData" name="<?php echo T6; ?>formData" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 30%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title"><?php echo LABEL_15; ?></h4>
+            </div>
+            <div class="modal-body smart-form">
+                <div style="position: relative;margin-bottom: 30px">
+                    <button type="button" class="btn btn-default pull-left" onclick="opcionScript.addEtiqueta();"><i class="fa fa-plus" style="padding: 5px;"></i></button><span class="pull-left">&nbsp;</span>
+                    <button type="button" class="btn btn-default pull-left" onclick="opcionScript.deleteEtiqueta();"><i class="fa fa-minus" style="padding: 5px;"></i></button>
+                </div>
+                <table id="<?php echo T6; ?>tabEtiquetas" class="table table-bordered table-striped table-condensed table-hover has-tickbox">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%"><?php echo LABEL_16 ?></th>
+                            <th style="width: 50%"><?php echo LABEL_17 ?></th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <ul> 
+                                <?php if(Session::get($campo)):?>
+                                    <?php 
+                                    $key = 0;
+                                    foreach (Session::get($campo) as $key => $value): 
+                                        $key++;
+                                    ?>
+                                    <li id="trEtiq<?php echo $key?>" class="etiq">
+                                        <label class="input pull-left" style="width: 50%;">
+                                            <input type="text" id="" name="<?php echo T6?>txt_etiqueta_campo[]" value="<?php echo $value['etiqueta']?>" onfocus="opcionScript.setFilaDelete(<?php echo $key?>);">
+                                        </label>
+                                        <label class="input pull-right" style="width: 50%">
+                                            <input type="text" id="" name="<?php echo T6?>txt_value_campo[]" value="<?php echo $value['valor']?>" onfocus="opcionScript.setFilaDelete(<?php echo $key?>);">
+                                        </label>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="<?php echo T6; ?>btnGr" type="submit" class="btn txt-color-white bg-color-blueDark">
+                    <i class="fa fa-save"></i> <?php echo BTN_GUARDAR; ?>
+                </button>
+                <button type="button" class="btn btn-default xClose">
+                    <i class="fa fa-ban"></i> <?php echo BTN_CLOSE; ?>
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    <!--si tiene opciones configuradas se setea la fila-->
+    <?php if(Session::get($campo)):?>
+        <script>
+            opcionScript.setFilaEtiq(<?php echo $key?>);
+        </script>
+    <!--si no tiene opciones se agrega primera opcion-->
+    <?php else:?>
+        <script>
+            opcionScript.addEtiqueta();
+        </script>
+    <?php endif; ?>
+        
+    <script>
+        $('#<?php echo T6; ?>tabEtiquetas').find('tbody').find('ul').sortable();
+        simpleScript.noSubmit('#<?php echo T6; ?>formData');
+
+        $('#<?php echo T6; ?>formData').validate({
+            // Rules for form validation
+            errorPlacement: function(error, element) {
+                error.insertAfter(element.parent());
+            },
+            submitHandler: function() {
+                var collection = $('#<?php echo T6; ?>tabEtiquetas').find('tbody').find('ul').find('li');
+                var error = 0;
+                $.each(collection,function(){
+                    var et = $(this).find('input:text:eq(0)'); 
+                    var va = $(this).find('input:text:eq(1)');
+                    
+                    et.parent().removeClass('state-error');
+                    va.parent().removeClass('state-error');
+                    
+                    if(et.val().length === 0){
+                        et.parent().addClass('state-error');
+                        error = 1;
+                    }
+                    if(va.val().length === 0){
+                        va.parent().addClass('state-error');
+                        error = 1;
+                    }
+                });
+                
+                if(error === 1){
+                    simpleScript.notify.error({
+                        content: 'Verifique los campos marcados'
+                    });
+                    return false;
+                }
+                opcion.postEtiquetasFijas();
+            }
+        });
+        /*para hacer evento invisible*/
+        simpleScript.removeAttr.click({
+            container: '#<?php echo T6; ?>formData',
+            typeElement: 'button'
+        });
+    </script>
+</form>
