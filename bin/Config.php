@@ -6,7 +6,7 @@
  * Config.php
  * --------------------------------------
  */
-define('BASE_URL','http://'.$_SERVER['HTTP_HOST'].'/CREATOR_V2/');#accede a las vistas delusuario
+define('BASE_URL','http://'.$_SERVER['HTTP_HOST'].'/CREATOR_V2.0/');#accede a las vistas delusuario
 define('DEFAULT_CONTROLLER','index');
 define('DEFAULT_METHOD','index');
 define('DEFAULT_LAYOUT','smartadmin');

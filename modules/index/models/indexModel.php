@@ -48,7 +48,7 @@ class indexModel extends Model {
             ':iDisplayStart' => $this->_pDisplayStart,
             ':iDisplayLength' => $this->_pDisplayLength,
             ':sOrder' => $this->_pOrder,
-            ':sSearch' => '',
+            ':sSearch' => $this->_pSearch ,
         );
         $data = $this->queryAll($query,$parms);
         return $data;

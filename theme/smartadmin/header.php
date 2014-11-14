@@ -71,6 +71,16 @@
             .table thead .sorting_desc_disabled {
               background: url('public/img/sort_desc_disabled.png') no-repeat center right;
             }
+            .table tr td.sorting_1 {
+                background-color: #F2F2F2 !important;
+            }
+            .table tr td.sorting_2 {
+                background-color: #E6E6E6 !important;
+            }
+            .borderTools{
+                border-left: 1px solid #CCC;
+                border-right: 1px solid #CCC;
+            }
         </style>
     </head>
     <body <?php if(!Session::get('sys_idUsuario')){ echo 'id="login" class="animated fadeInDown"'; }?>>   
