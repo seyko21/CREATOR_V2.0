@@ -19,7 +19,7 @@ define('APP_PASS_KEY','99}dF7EZbnbXOkojf&dzvxd5q#guPbPK1spU75Jm|N79Ii7PK');
 define('APP_EXPORT_FILES',ROOT . 'public' . DS . 'files' . DS);
 define('APP_COD_SADM','0001');
 define('APP_COD_ADM','0002');
-define('APP_PRE_METHOD','Event');
+define('APP_PRE_METHOD','');//antes Event
 define('APP_COMPARE_INDEX',-6);
 
 define('DB_ENTORNO','D');  /*D=DESARROLLO, P=PRODUCCION*/

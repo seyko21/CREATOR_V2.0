@@ -75,6 +75,7 @@
 <script src="<?php echo BASE_URL ?>libs/Aes/js/utf8.js"></script>
 <script src="<?php echo BASE_URL ?>public/js/scrollTable.js"></script>
 <script src="<?php echo BASE_URL ?>public/js/simpleGrid.jquery.js"></script>
+<script src="<?php echo BASE_URL ?>modules/auditoria/views/js/auditoria.js"></script>
 </body>  
 
 <script>

@@ -15,7 +15,7 @@ class aplicacionController extends Controller{
         self::$moduloModel = $this->loadModel();
     }
     
-    public function indexEvent(){ 
+    public function index(){ 
         Obj::run()->View->render();
     }
     
@@ -24,7 +24,7 @@ class aplicacionController extends Controller{
     }
     
     /*carga formulario (newAplicacion.phtml) para nuevo registro: Aplicacion*/
-    public function formNewAplicacionEvent(){
+    public function formNewAplicacion(){
         Obj::run()->View->render();
     }
     

@@ -14,11 +14,11 @@ class configurarUsuariosController extends Controller{
         self::$configurarUsuariosModel = $this->loadModel();
     }
 
-    public function indexEvent(){ 
+    public function index(){ 
         Obj::run()->View->render();
     }
 
-    public function getUsuariosEvent(){ 
+    public function getUsuarios(){ 
         $editar = Session::getPermiso('CUSED');
         $eliminar = Session::getPermiso('CUSDE');
         
@@ -79,11 +79,11 @@ class configurarUsuariosController extends Controller{
         echo $sOutput;
     }
     
-    public function nuevoUsuarioEvent(){ 
+    public function nuevoUsuario(){ 
         Obj::run()->View->render();
     }
     
-    public function editarUsuarioEvent(){ 
+    public function editarUsuario(){ 
         Obj::run()->View->render();
     }
     
@@ -97,7 +97,7 @@ class configurarUsuariosController extends Controller{
         return $rResult;
     }
     
-    public function buscarEmpleadoEvent(){ 
+    public function buscarEmpleado(){ 
         Obj::run()->View->render();
     }
     
@@ -106,7 +106,7 @@ class configurarUsuariosController extends Controller{
         return $rResult;
     }
     
-    public function getEmpleadosEvent(){ 
+    public function getEmpleados(){ 
         $tab = SimpleForm::getParam('_tab');
         $sEcho          =   SimpleForm::getParam('sEcho');
         
@@ -141,19 +141,19 @@ class configurarUsuariosController extends Controller{
         echo $sOutput;
     }
     
-    public function postNuevoUsuarioEvent(){
+    public function postNuevoUsuario(){
         $data = self::$configurarUsuariosModel->mantenimientoUsuario();
         
         echo json_encode($data);
     }
     
-    public function postEditarUsuarioEvent(){
+    public function postEditarUsuario(){
         $data = self::$configurarUsuariosModel->editarUsuario();
         
         echo json_encode($data);
     }
     
-    public function postDeleteUsuarioEvent(){
+    public function postDeleteUsuario(){
         $data = self::$configurarUsuariosModel->deleteUsuario();
         
         echo json_encode($data);

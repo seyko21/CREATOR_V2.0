@@ -17,11 +17,11 @@ class moduloController extends Controller{
         self::$aplicacionModel = $this->loadModel('aplicacion');
     }
     
-    public function indexEvent(){ 
+    public function index(){ 
         Obj::run()->View->render();
     }
     
-    public function getGridModuloEvent(){
+    public function getGridModulo(){
         $crearopcion = Session::getPermiso('CREMOCO');
         $veropcion   = Session::getPermiso('CREMOVO');
         
@@ -87,11 +87,11 @@ class moduloController extends Controller{
         return $data;
     }
     
-    public function formNuevoModuloEvent(){
+    public function formNuevoModulo(){
         Obj::run()->View->render();
     }
     
-    public function postNuevoModuloEvent(){ 
+    public function postNuevoModulo(){ 
         $app = self::$moduloModel->getRuta();
        
 //        $app = aplicacionModel::find(SimpleForm::getParam(T5.'lst_aplicacion'));

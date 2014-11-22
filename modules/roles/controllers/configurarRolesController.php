@@ -14,11 +14,11 @@ class configurarRolesController extends Controller{
         self::$configurarRolesModel = $this->loadModel();
     }
 
-    public function indexEvent(){
+    public function index(){
         Obj::run()->View->render();
     }
 
-    public function getRolesEvent(){ 
+    public function getRoles(){ 
         $accesos  = Session::getPermiso('CROAC');
         $eliminar = Session::getPermiso('CRODE');
         $editar   = Session::getPermiso('CROED');
@@ -91,11 +91,11 @@ class configurarRolesController extends Controller{
         echo $sOutput;
     }
     
-    public function nuevoRolEvent(){ 
+    public function nuevoRol(){ 
         Obj::run()->View->render();
     }
     
-    public function editarRolEvent(){ 
+    public function editarRol(){ 
         Obj::run()->View->key = SimpleForm::getParam('_key'); 
         Obj::run()->View->render();
     }
@@ -136,41 +136,41 @@ class configurarRolesController extends Controller{
         return $data;
     }
     
-    public function accesosEvent(){ 
+    public function accesos(){ 
         Obj::run()->View->keyRol = SimpleForm::getParam('_key');
         Obj::run()->View->render();
     }
     
-    public function accesosRolOpcionEvent(){ 
+    public function accesosRolOpcion(){ 
         Obj::run()->View->_rolOpcion = SimpleForm::getParam('_rolOpcion');
         Obj::run()->View->render();
     }
     
-    public function postRolEvent(){ 
+    public function postRol(){ 
         $data = self::$configurarRolesModel->mantenimientoRol();
         
         echo json_encode($data);
     }
     
-    public function postDeleteRolEvent(){ 
+    public function postDeleteRol(){ 
         $data = self::$configurarRolesModel->mantenimientoRol();
         
         echo json_encode($data);
     }
     
-    public function postOpcionEvent(){ 
+    public function postOpcion(){ 
         $data = self::$configurarRolesModel->mantenimientoRolOpcion();
         
         echo json_encode($data);
     }
     
-    public function postAccionOpcionRolEvent(){ 
+    public function postAccionOpcionRol(){ 
         $data = self::$configurarRolesModel->mantenimientoRolOpcionAccion();
         
         echo json_encode($data); 
     }
     
-    public function duplicarRolEvent(){ 
+    public function duplicarRol(){ 
         $data = self::$configurarRolesModel->postDuplicarRol();
         
         echo json_encode($data); 

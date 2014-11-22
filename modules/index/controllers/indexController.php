@@ -17,7 +17,7 @@ class indexController extends Controller{
         self::$loginModel = $this->loadModel('login');
     }
 
-    public function indexEvent(){
+    public function index(){
         if(Session::get('sys_idUsuario')){  
             Session::set('sys_menu', $this->getMenu());
             Obj::run()->View->render('index',false);
@@ -34,7 +34,7 @@ class indexController extends Controller{
         return self::$loginModel->getAccionesOpcion($opcion);
     }
     
-    public function menuEvent(){
+    public function menu(){
         Obj::run()->View->render();
     }
     
@@ -45,7 +45,7 @@ class indexController extends Controller{
         Obj::run()->View->render('lock');
     }
     
-    public function changeRolEvent(){
+    public function changeRol(){
         
         $idRol = SimpleForm::getParam('_idRol');
          
@@ -59,8 +59,14 @@ class indexController extends Controller{
     }
     
     /*para la demo de mi dataGrid*/
-    function dataGridEvent(){
+    function dataGrid(){
         $data =  self::$indexModel->dataGrid();
+        echo json_encode($data);
+    }
+    
+    /*para la demo de mi dataGrid*/
+    function listaModulos(){
+        $data =  self::$indexModel->listaModulos();
         echo json_encode($data);
     }
     

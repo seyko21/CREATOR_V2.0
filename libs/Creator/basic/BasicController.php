@@ -22,7 +22,7 @@ class '.$capitaleOpcion.'Controller extends Controller{
         self::$'.$opcion.'Model = $this->loadModel();
     }
     
-    public function indexEvent(){ 
+    public function index(){ 
         Obj::run()->View->render();
     }
     
@@ -98,45 +98,45 @@ class '.$capitaleOpcion.'Controller extends Controller{
     }
     
     /*carga formulario (formNew'.$capitaleOpcion.'.phtml) para nuevo registro: '.$capitaleOpcion.'*/
-    public function formNew'.$capitaleOpcion.'Event(){
+    public function formNew'.$capitaleOpcion.'(){
         Obj::run()->View->render();
     }
     
     /*carga formulario (formEdit'.$capitaleOpcion.'.phtml) para editar registro: '.$capitaleOpcion.'*/
-    public function formEdit'.$capitaleOpcion.'Event(){
+    public function formEdit'.$capitaleOpcion.'(){
         Obj::run()->View->render();
     }
     
     /*busca data para editar registro: '.$capitaleOpcion.'*/
-    public function find'.$capitaleOpcion.'Event(){
+    public function find'.$capitaleOpcion.'(){
         $data = self::$'.$opcion.'Model->find'.$capitaleOpcion.'();
             
         return $data;
     }
     
     /*envia datos para grabar registro: '.$capitaleOpcion.'*/
-    public function new'.$capitaleOpcion.'Event(){
+    public function new'.$capitaleOpcion.'(){
         $data = self::$'.$opcion.'Model->new'.$capitaleOpcion.'();
         
         echo json_encode($data);
     }
     
     /*envia datos para editar registro: '.$capitaleOpcion.'*/
-    public function edit'.$capitaleOpcion.'Event(){
+    public function edit'.$capitaleOpcion.'(){
         $data = self::$'.$opcion.'Model->edit'.$capitaleOpcion.'();
         
         echo json_encode($data);
     }
     
     /*envia datos para eliminar registro: '.$capitaleOpcion.'*/
-    public function delete'.$capitaleOpcion.'Event(){
+    public function delete'.$capitaleOpcion.'(){
         $data = self::$'.$opcion.'Model->delete'.$capitaleOpcion.'();
         
         echo json_encode($data);
     }
     
     /*envia datos para eliminar registros: '.$capitaleOpcion.'*/
-    public function delete'.$capitaleOpcion.'AllEvent(){
+    public function delete'.$capitaleOpcion.'All(){
         $data = self::$'.$opcion.'Model->delete'.$capitaleOpcion.'All();
         
         echo json_encode($data);

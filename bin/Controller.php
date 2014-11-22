@@ -15,7 +15,7 @@ abstract class Controller extends Obj{
 
     #obliga a que todas las clases que heredan Controller tengan un metodo index,
     #esto es para la validacion del metodo en Request
-    abstract public function indexEvent(); 
+    abstract public function index(); 
     
     /*para llamar controladores de un modulo a otro*/
     protected function loadController($control){

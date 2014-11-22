@@ -53,13 +53,14 @@ class moduloModel extends Model{
                 }
         }
         
-        $query = "call sp_consModuloGrid(:iDisplayStart,:iDisplayLength,:sOrder,:sSearch);";
+        $query = "call sp_consModuloGrid(:iDisplayStart,:iDisplayLength,:sOrder,:sSearch,:sFilterCols);";
         
         $parms = array(
             ':iDisplayStart' => $this->_iDisplayStart,
             ':iDisplayLength' => $this->_iDisplayLength,
             ':sOrder' => $sOrder,
             ':sSearch' => $this->_sSearch,
+            ':sFilterCols' => ''
         );
         $data = $this->queryAll($query,$parms);
         return $data;

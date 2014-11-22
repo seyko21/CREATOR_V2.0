@@ -13,11 +13,11 @@ class accionesController extends Controller{
         self::$accionesModel = $this->loadModel();
     }
 
-    public function indexEvent(){
+    public function index(){
         Obj::run()->View->render();
     }
     
-    public function getAccionesEvent(){ 
+    public function getAcciones(){ 
         $editar   = Session::getPermiso('ACCED');
         $eliminar = Session::getPermiso('ACCDE');
         
@@ -78,11 +78,11 @@ class accionesController extends Controller{
         echo $sOutput;
     }
     
-    public function nuevaAccionEvent(){
+    public function nuevaAccion(){
         Obj::run()->View->render();
     }
     
-    public function editAccionEvent(){ 
+    public function editAccion(){ 
         Obj::run()->View->render();
     }
     
@@ -92,13 +92,13 @@ class accionesController extends Controller{
         return $data;
     }
     
-    public function postAccionEvent(){ 
+    public function postAccion(){ 
         $data = self::$accionesModel->mantenimientoAccion();
         
         echo json_encode($data);
     }
     
-    public function postDeleteAccionEvent(){ 
+    public function postDeleteAccion(){ 
         $data = self::$accionesModel->mantenimientoAccion();
         
         echo json_encode($data);

@@ -9,3 +9,4 @@ tabs.T4 = '<?php echo T4; ?>';
 tabs.T5 = '<?php echo T5; ?>';
 tabs.T6 = '<?php echo T6; ?>';
 tabs.CRAP = '<?php echo CRAP; ?>';
+tabs.xxxxxx = '<?php echo xxxxxx; ?>';

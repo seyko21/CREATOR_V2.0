@@ -15,7 +15,9 @@ class indexModel extends Model {
     private $_pSortingCols;
     private $_pSearch;
     private $_pOrder;
-    
+    private $_sFilterCols;
+
+
     public function __construct() {
         parent::__construct();
         $this->_set();
@@ -26,7 +28,8 @@ class indexModel extends Model {
         $this->_pDisplayLength =   SimpleForm::getParam('pDisplayLength'); 
         $this->_pSortingCols   =   SimpleForm::getParam('pSortingCols');
         $this->_pSearch        =   SimpleForm::getParam('pSearch');
-        $this->_pOrder        =   SimpleForm::getParam('pOrder');
+        $this->_pOrder         =   SimpleForm::getParam('pOrder');
+        $this->_sFilterCols    =   AesCtr::de(SimpleForm::getParam('sFilterCols'));
     }
     
     public function dataGrid(){
@@ -42,13 +45,28 @@ class indexModel extends Model {
 //                }
 //        }
         
-        $query = "call sp_consModuloGrid(:iDisplayStart,:iDisplayLength,:sOrder,:sSearch);";
+        $query = "call sp_consModuloGrid(:iDisplayStart,:iDisplayLength,:sOrder,:sSearch,:sFilterCols);";
         
         $parms = array(
             ':iDisplayStart' => $this->_pDisplayStart,
             ':iDisplayLength' => $this->_pDisplayLength,
             ':sOrder' => $this->_pOrder,
             ':sSearch' => $this->_pSearch ,
+            ':sFilterCols' => $this->_sFilterCols,
+        );
+        $data = $this->queryAll($query,$parms);
+        return $data;
+    }
+    
+    public function listaModulos(){
+        $query = "call sp_consModuloGrid(:iDisplayStart,:iDisplayLength,:sOrder,:sSearch,:sFilterCols);";
+        
+        $parms = array(
+            ':iDisplayStart' => $this->_pDisplayStart,
+            ':iDisplayLength' => $this->_pDisplayLength,
+            ':sOrder' => $this->_pOrder,
+            ':sSearch' => $this->_pSearch ,
+            ':sFilterCols' => $this->_sFilterCols,
         );
         $data = $this->queryAll($query,$parms);
         return $data;

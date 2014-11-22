@@ -14,11 +14,11 @@ class opcionController extends Controller{
         self::$opcionModel = $this->loadModel();
     }
     
-    public function indexEvent(){ 
+    public function index(){ 
         Obj::run()->View->render();
     }
     
-    public function uniqueEvent(){ 
+    public function unique(){ 
         //$t=$mm->find(array('id_opcion'=>27,'id_modulo'=>24),array('id_opcion','opcion'));
 //        Obj::$call->opcionModel->find(27);
 //        echo Obj::$call->opcionModel->usuario_creacion;
@@ -52,7 +52,7 @@ class opcionController extends Controller{
         echo json_encode($datax);
     }
     
-    public function formTablesDBEvent(){
+    public function formTablesDB(){
         Obj::run()->View->render();
     }
 
@@ -62,7 +62,7 @@ class opcionController extends Controller{
         return $data;
     }
     
-    public function formHtmlColumnasEvent(){
+    public function formHtmlColumnas(){
         Obj::run()->View->render();
     }
     
@@ -72,7 +72,7 @@ class opcionController extends Controller{
         return $data;
     }
     
-    public function formDataEvent(){
+    public function formData(){
         $tipo = SimpleForm::getParam('_tipoData');
         $element = SimpleForm::getParam('_element');
         
@@ -86,7 +86,7 @@ class opcionController extends Controller{
         
     }
     
-    public function crearEvent(){ 
+    public function crear(){ 
         $data = self::$opcionModel->postCrear();
         
         if($data == 1){
@@ -99,7 +99,7 @@ class opcionController extends Controller{
         echo json_encode($datax);
     }
     
-    public function guardarEtiquetasFijasEvent(){ 
+    public function guardarEtiquetasFijas(){ 
         $data = self::$opcionModel->guardarEtiquetasFijas();
         
         echo json_encode($data);

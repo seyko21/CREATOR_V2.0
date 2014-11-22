@@ -13,7 +13,7 @@ class configurarMenuController extends Controller{
         self::$configurarMenuModel = $this->loadModel();
     }
 
-    public function indexEvent(){
+    public function index(){
         Obj::run()->View->render();
     }
     
@@ -37,39 +37,39 @@ class configurarMenuController extends Controller{
         return $rResult;
     }
     
-    public function dominiosEvent(){
+    public function dominios(){
         Obj::run()->View->render();
     }
     
-    public function modulosEvent(){
+    public function modulos(){
         Obj::run()->View->render();
     }
     
-    public function menuPrincipalesEvent(){
+    public function menuPrincipales(){
         Obj::run()->View->render();
     }
     
-    public function nuevoDominioEvent(){
+    public function nuevoDominio(){
         Obj::run()->View->render();
     }
     
-    public function nuevoModuloEvent(){
+    public function nuevoModulo(){
         Obj::run()->View->render();
     }
     
-    public function nuevoMenuPrincipalEvent(){
+    public function nuevoMenuPrincipal(){
         Obj::run()->View->render();
     }
     
-    public function editarDominioEvent(){ 
+    public function editarDominio(){ 
         Obj::run()->View->render();
     }
     
-    public function editarModuloEvent(){ 
+    public function editarModulo(){ 
         Obj::run()->View->render();
     }
     
-    public function editarMenuPrincipalEvent(){ 
+    public function editarMenuPrincipal(){ 
         Obj::run()->View->render();
     }
     
@@ -91,55 +91,55 @@ class configurarMenuController extends Controller{
         return $data;
     }
     
-    public function postDominioEvent(){ 
+    public function postDominio(){ 
         $data = self::$configurarMenuModel->mantenimientoDominio();
         
         echo json_encode($data);
     }
     
-    public function deleteDominioEvent(){ 
+    public function deleteDominio(){ 
         $data = self::$configurarMenuModel->mantenimientoDominio();
         
         echo json_encode($data);
     }
     
-    public function postModuloEvent(){ 
+    public function postModulo(){ 
         $data = self::$configurarMenuModel->mantenimientoModulo();
         
         echo json_encode($data);
     }
     
-    public function postDeleteModuloEvent(){ 
+    public function postDeleteModulo(){ 
         $data = self::$configurarMenuModel->mantenimientoModulo();
         
         echo json_encode($data);
     }
     
-    public function postMenuPrincipalEvent(){ 
+    public function postMenuPrincipal(){ 
         $data = self::$configurarMenuModel->mantenimientoMenuPrincipal();
         
         echo json_encode($data);
     }
     
-    public function postDeleteMenuPrincipalEvent(){ 
+    public function postDeleteMenuPrincipal(){ 
         $data = self::$configurarMenuModel->mantenimientoMenuPrincipal();
         
         echo json_encode($data);
     }
     
-    public function postSortDominioEvent(){ 
+    public function postSortDominio(){ 
         $data = self::$configurarMenuModel->mantenimientoDominio();
         
         echo json_encode($data);
     }
     
-    public function postOrdenarModuloEvent(){ 
+    public function postOrdenarModulo(){ 
         $data = self::$configurarMenuModel->mantenimientoModulo();
         
         echo json_encode($data);
     }
     
-    public function postOrdenarMenuPrincipalEvent(){ 
+    public function postOrdenarMenuPrincipal(){ 
         $data = self::$configurarMenuModel->mantenimientoMenuPrincipal();
         
         echo json_encode($data);

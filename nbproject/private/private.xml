@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/fabrica/views/opcion/formHtmlColumnas.phtml</file>
-            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/views/js/loginScript.js</file>
+            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/views/index/login.phtml</file>
+            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/controllers/indexController.php</file>
+            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/public/css/general.css</file>
+            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/views/js/login.js</file>
             <file>file:/D:/xampp/htdocs/CREATOR_V2.0/public/js/simpleGrid.jquery.js</file>
+            <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/views/js/loginScript.js</file>
             <file>file:/D:/xampp/htdocs/CREATOR_V2.0/modules/index/models/indexModel.php</file>
         </group>
     </open-files>

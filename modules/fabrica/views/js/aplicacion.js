@@ -21,25 +21,34 @@ var aplicacion_ = function(){
     
     /*crea tab : Aplicacion*/
     this.publico.main = function(){
-        simpleScript.addTab({
-            id : tabs.CRAP,
-            label: simpleObject.getTitle(),
-            fnCallback: function(){
-                aplicacion.getContenido();
-            }
-        });
+        try{
+            simpleScript.addTab({
+                id : tabs.CRAP,
+                label: simpleObject.getTitle(),
+                fnCallback: function(){
+                    aplicacion.index();
+                }
+            });
+        }catch(ex){
+            auditoria.logErrors(ex);
+        }
+        
     };
     
     /*contenido de tab: Aplicacion*/
-    this.publico.getContenido = function(){
-        simpleAjax.send({
-            dataType: "html",
-            root: _private.config.modulo,
-            fnCallback: function(data){
-                $("#"+tabs.CRAP+"_CONTAINER").html(data);
-                aplicacion.getGridAplicacion();
-            }
-        });
+    this.publico.index = function(){
+        try{
+            simpleAjax.send({
+                dataType: "html",
+                root: _private.config.modulo,
+                fnCallback: function(data){
+                    $("#"+tabs.CRAP+"_CONTAINER").html(data);
+                    aplicacion.getGridAplicacion();
+                }
+            });
+        }catch(ex){
+            auditoria.logErrors(ex);
+        }
     };
     
     this.publico.getGridAplicacion = function (){
@@ -47,15 +56,20 @@ var aplicacion_ = function(){
     };
     
     this.publico.getFormNewAplicacion = function(btn){
-        simpleAjax.send({
-            element: btn,
-            dataType: "html",
-            root: _private.config.modulo + "formNewAplicacion",
-            fnCallback: function(data){
-                $("#cont-modal").append(data);  /*los formularios con append*/
-                $("#"+tabs.CRAP+"formNewAplicacion").modal("show");
-            }
-        });
+        try{
+            simpleAjax.send({
+                element: btn,
+                dataType: "html",
+                root: _private.config.modulo + "formNewAplicacion",
+                fnCallback: function(data){
+                    $("#cont-modal").append(data);  /*los formularios con append*/
+                    $("#"+tabs.CRAP+"formNewAplicacion").modal("show");
+                }
+            });
+        }catch(ex){
+            auditoria.logErrors(ex);
+        }
+        
     };
     
     this.publico.postNewAplicacion = function(){
@@ -63,33 +77,37 @@ var aplicacion_ = function(){
     };
     
     this.publico.postDeleteAplicacionAll = function(btn){
-        simpleScript.validaCheckBox({
-            id: "#"+tabs.CRAP+"gridAplicacion",
-            msn: lang.mensajes.MSG_9,
-            fnCallback: function(){
-                simpleScript.notify.confirm({
-                    content: lang.mensajes.MSG_7,
-                    callbackSI: function(){
-                        simpleAjax.send({
-                            flag: 3, //si se usa SP usar flag, sino se puede eliminar esta linea
-                            element: btn,
-                            form: "#"+tabs.CRAP+"formGridAplicacion",
-                            root: _private.config.modulo + "postDeleteAplicacionAll",
-                            fnCallback: function(data) {
-                                if(!isNaN(data.result) && parseInt(data.result) === 1){
-                                    simpleScript.notify.ok({
-                                        content: lang.mensajes.MSG_8,
-                                        callback: function(){
-                                            aplicacion.getGridAplicacion();
-                                        }
-                                    });
+        try{
+            simpleScript.validaCheckBox({
+                id: "#"+tabs.CRAP+"gridAplicacion",
+                msn: lang.mensajes.MSG_9,
+                fnCallback: function(){
+                    simpleScript.notify.confirm({
+                        content: lang.mensajes.MSG_7,
+                        callbackSI: function(){
+                            simpleAjax.send({
+                                flag: 3, //si se usa SP usar flag, sino se puede eliminar esta linea
+                                element: btn,
+                                form: "#"+tabs.CRAP+"formGridAplicacion",
+                                root: _private.config.modulo + "postDeleteAplicacionAll",
+                                fnCallback: function(data) {
+                                    if(!isNaN(data.result) && parseInt(data.result) === 1){
+                                        simpleScript.notify.ok({
+                                            content: lang.mensajes.MSG_8,
+                                            callback: function(){
+                                                aplicacion.getGridAplicacion();
+                                            }
+                                        });
+                                    }
                                 }
-                            }
-                        });
-                    }
-                });
-            }
-        });
+                            });
+                        }
+                    });
+                }
+            });
+        }catch(ex){
+            auditoria.logErrors(ex);
+        }
     };
     
     return this.publico;

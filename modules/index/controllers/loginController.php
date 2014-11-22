@@ -13,7 +13,7 @@ class loginController extends Controller{
         self::$loginModel = $this->loadModel();
     }
 
-    public function indexEvent() {
+    public function index() {
         $data = self::$loginModel->getValidar();
   
         if(isset($data['id_usuario'])){
@@ -40,7 +40,7 @@ class loginController extends Controller{
         echo json_encode($data);
     }
     
-    public function logoutEvent(){
+    public function logout(){
         Session::destroy();
         $result = array('result' =>1);
         echo json_encode($result);

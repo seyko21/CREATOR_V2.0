@@ -42,18 +42,18 @@ class View{
             
             $vista = $last_call['function'];
             /*verifica si metodo ajax tiene la palabra Event*/
-            $c = substr_compare($vista,APP_PRE_METHOD,APP_COMPARE_INDEX);
+            //$c = substr_compare($vista,APP_PRE_METHOD,APP_COMPARE_INDEX);
         }
         
         /*para las vistas via ajax*/
-        if($c && $ajax){
+        //if($c && $ajax){
             /*la vista, segun el metodo ejecutado, sin Event*/
-            $vista = str_replace(APP_PRE_METHOD,'',$vista);
+            //$vista = str_replace(APP_PRE_METHOD,'',$vista);
             
+            //$rutaVista = ROOT . 'modules' . DS . Obj::run()->Request->getModulo() . DS . 'views' . DS . $carpeta . DS . $vista . '.phtml';
+        //}else{/*para las vistas sin ajax*/
             $rutaVista = ROOT . 'modules' . DS . Obj::run()->Request->getModulo() . DS . 'views' . DS . $carpeta . DS . $vista . '.phtml';
-        }else{/*para las vistas sin ajax*/
-            $rutaVista = ROOT . 'modules' . DS . Obj::run()->Request->getModulo() . DS . 'views' . DS . $carpeta . DS . $vista . '.phtml';
-        }
+        //}
         
         if(is_readable($rutaVista)){
             /*para las vistas via ajax*/
